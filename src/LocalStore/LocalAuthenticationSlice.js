@@ -10,8 +10,10 @@ const authentication = createSlice({
   initialState,
   reducers: {
     storeLogin: (state, action) => {
+      console.log("trying Store Login");
       state.status = true;
       state.userData = action.payload.userData;
+      console.log("Store logged in !");
     },
     storeLogout: (state, action) => {
       console.log("Store logged out");

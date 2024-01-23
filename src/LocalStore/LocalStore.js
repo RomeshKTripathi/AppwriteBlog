@@ -1,5 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import reducers from "./LocalAuthenticationSlice";
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    user: reducers,
+  },
 });
 export default store;

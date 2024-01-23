@@ -2,21 +2,29 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Logo, Input } from "../ComponentIndex";
+import { authentication as auth } from "../../appwrite/AppwriteAuthentication";
+import { useDispatch } from "react-redux";
+import { storeLogin } from "../../LocalStore/LocalAuthenticationSlice";
 
 const Login = () => {
   const [error, setError] = useState("");
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { handleSubmit, register } = useForm();
 
-  const userLogin = (formData) => {
+  const userLogin = async (formData) => {
     setError("");
 
-    // Appwrite Signup && Store Signup code here
-
-    console.log(formData);
-    navigate("/");
+    try {
+      const userData = await auth.appwriteLogin(formData);
+      if (userData) {
+        dispatch(storeLogin(userData));
+        navigate("/");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
