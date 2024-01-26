@@ -9,6 +9,7 @@ const RTE = ({ name, control, defaultValue = "" }) => {
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
+            initialValue={defaultValue}
             apiKey="o2na07kmk4c1zw4r6w5cew464lnz2fpsevgmngovb9q4hf5b"
             init={{
               plugins:

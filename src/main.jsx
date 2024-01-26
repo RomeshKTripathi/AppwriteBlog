@@ -15,6 +15,7 @@ import {
   Signup,
   Post,
   AddPost,
+  EditPost,
 } from "./components/PagesIndex.js";
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/add-post",
         element: <AddPost />,
+      },
+      {
+        path: "/edit-post/:postId",
+        element: <EditPost />,
       },
     ],
   },
