@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const PostForm = ({ post }) => {
-  console.log(post);
   const { handleSubmit, register, control, watch, setValue, getValues } =
     useForm({
       defaultValues: {
@@ -22,15 +21,18 @@ const PostForm = ({ post }) => {
 
   const submitArticle = async (article) => {
     if (post) {
-      const file = article.image ? service.uploadFile(article.image[0]) : null;
+      const file = article.image
+        ? await service.uploadFile(article.image[0])
+        : null;
       // Delete Privious featured image
       if (file) {
-        service.deleteFile(post.featuredimage);
+        console.log(post.featuredimage);
+        if (post.featuredimage) await service.deleteFile(post.featuredimage);
       }
       // Update post.
       const dbPost = await service.updatePost(post.$id, {
         ...article,
-        featuredimage: file ? file.$id : post.featuredimage,
+        image: file ? file.$id : post.featuredimage,
       });
       if (dbPost) {
         navigate("/");
@@ -77,7 +79,7 @@ const PostForm = ({ post }) => {
     <div className="w-full">
       <form
         onSubmit={handleSubmit(submitArticle)}
-        className="w-full p-12 mx-auto"
+        className="w-full p-12 mx-auto max-sm:p-2"
       >
         <div className="">
           <Input
@@ -109,6 +111,16 @@ const PostForm = ({ post }) => {
           <Input type="submit" className="cursor-pointer hover:bg-teal-100" />
         </div>
       </form>
+      {post && (
+        <div className="w-96 ml-12 rounded-sm max-sm:w-full max-sm:m-2">
+          <p>Featured image is</p>
+          <img
+            className="rounded-sm "
+            src={service.getFilePreview(post.featuredimage)}
+            alt=""
+          />
+        </div>
+      )}
     </div>
   );
 };

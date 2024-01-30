@@ -11,7 +11,6 @@ const EditPost = () => {
     service.getPost(postId).then((response) => {
       setPost(response);
       setLoader(false);
-      console.log(post);
     });
   }, []);
   return loader ? <div>Loading Editor</div> : <PostForm post={post} />;

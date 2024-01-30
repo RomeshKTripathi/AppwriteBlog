@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RelatedArticle = ({ article }) => {
@@ -21,4 +21,4 @@ const RelatedArticle = ({ article }) => {
   );
 };
 
-export default RelatedArticle;
+export default memo(RelatedArticle);
