@@ -1,0 +1,22 @@
+.article {
+  background-color: transparent;
+}
+
+.article h1 {
+  font-size: 40px;
+  margin-bottom: 6px;
+}
+.article h2 {
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+.article i {
+  font-style: italic;
+}
+.article b {
+  font-weight: 700;
+}
+.article h3 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}

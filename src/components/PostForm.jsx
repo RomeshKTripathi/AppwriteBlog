@@ -21,7 +21,7 @@ const PostForm = ({ post }) => {
 
   const submitArticle = async (article) => {
     if (post) {
-      const file = article.image
+      const file = article.image[0]
         ? await service.uploadFile(article.image[0])
         : null;
       // Delete Privious featured image
@@ -40,18 +40,15 @@ const PostForm = ({ post }) => {
     } else {
       const file = article.image[0]
         ? await service.uploadFile(article.image[0])
-        : "undefined";
-      if (file) {
-        const fileId = file.$id;
-        const dbPost = service.createPost({
-          ...article,
-          userId: userData.$id,
-          image: fileId,
-          slug: String(Date.now()),
-        });
-        if (dbPost) {
-          navigate("/");
-        }
+        : null;
+      const dbPost = service.createPost({
+        ...article,
+        userId: userData.$id,
+        image: file ? file.$id : undefined,
+        slug: String(Date.now()),
+      });
+      if (dbPost) {
+        navigate("/");
       }
     }
   };
@@ -106,7 +103,7 @@ const PostForm = ({ post }) => {
             type="file"
             accept="image/png, image/jpg, image/jpeg, image/gif"
             placeholder="Select Featured Image"
-            {...register("image", { required: true })}
+            {...register("image")}
           />
           <Input type="submit" className="cursor-pointer hover:bg-teal-100" />
         </div>

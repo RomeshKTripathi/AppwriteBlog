@@ -34,7 +34,6 @@ export class Service {
   }
 
   async updatePost(slug, { title, content, image, status }) {
-    console.log("Received Image: ", image);
     try {
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
@@ -92,7 +91,6 @@ export class Service {
   }
 
   async uploadFile(file) {
-    console.log("Received file: ", file);
     try {
       return await this.bucket.createFile(
         conf.appwriteBucketId,

@@ -13,7 +13,7 @@ const Logo = ({ clickable = true, className = "" }) => {
       } ${className}
        `}
     >
-      Blog<span className="text-rose-500">Project</span>
+      Open<span className="text-rose-500">BOX</span>
     </span>
   );
 };

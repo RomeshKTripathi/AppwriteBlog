@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import service from "../../appwrite/AppwriteService";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import Loading from "../Loading";
 
 const Post = () => {
   const { postId } = useParams();
@@ -17,14 +18,16 @@ const Post = () => {
       .then((response) => setArticle(response))
       .finally(() => {
         setLoader(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        navigate("/");
       });
   }, []);
   return loader ? (
-    <div className="w-full h-full mx-auto my-auto text-3xl text-center align-middle text-rose-500">
-      Loading...
-    </div>
+    <Loading />
   ) : (
-    <div className="w-1/2 mx-auto my-5 text-justify text-neutral-900 max-lg:w-2/3 max-md:w-full max-md:px-6 max-md:py-8">
+    <div className="w-1/2 mx-auto my-5 text-justify text-neutral-900 max-lg:w-2/3 max-md:w-full max-md:px-6 max-md:py-8 article">
       <div>
         {
           <img
