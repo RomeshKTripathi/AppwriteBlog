@@ -17,14 +17,14 @@ const Header = () => {
       active: true,
     },
     {
-      title: "All Posts",
-      url: "/all-posts",
-      active: true,
+      title: "MyPosts",
+      url: "/myposts",
+      active: useSelector((state) => state.user.status),
     },
     {
       title: "Services",
       url: "/services",
-      active: true,
+      active: false,
     },
     {
       title: "Contact Us",

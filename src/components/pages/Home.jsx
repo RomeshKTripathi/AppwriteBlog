@@ -9,7 +9,6 @@ const Home = () => {
     service.getPosts([]).then((response) => {
       setArticles(response.documents);
     });
-    console.log("Articles Received");
   }, []);
   return (
     <div className="w-full  p-12 max-sm:p-4 flex flex-wrap justify-evenly">

@@ -12,7 +12,7 @@ const EditPost = () => {
       setPost(response);
       setLoader(false);
     });
-  }, []);
+  }, [post]);
   return loader ? <div>Loading Editor</div> : <PostForm post={post} />;
 };
 

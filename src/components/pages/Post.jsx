@@ -23,7 +23,7 @@ const Post = () => {
         console.log(error);
         navigate("/");
       });
-  }, []);
+  }, [userData]);
   return loader ? (
     <Loading />
   ) : (

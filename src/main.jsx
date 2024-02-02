@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import {
   Home,
   Posts,
-  AllPosts,
+  MyPosts,
   Services,
   ContactUs,
   Login,
@@ -32,8 +32,8 @@ const router = createBrowserRouter([
         element: <Posts />,
       },
       {
-        path: "/all-posts",
-        element: <AllPosts />,
+        path: "/myposts",
+        element: <MyPosts />,
       },
       {
         path: "/services",
