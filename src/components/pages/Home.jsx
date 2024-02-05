@@ -30,7 +30,7 @@ const Home = () => {
             <RelatedArticle key={index} article={article} />
           ))
         ) : (
-          <div>No Articles Available</div>
+          <div>No Articles Available Login first</div>
         )}
       </div>
     </div>

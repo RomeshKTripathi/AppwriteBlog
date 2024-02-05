@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Post from "./pages/Post";
 import AddPost from "./pages/AddPost";
 import EditPost from "./pages/EditPost";
+import AutherizedUser from "./AutherizedUser";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   Post,
   AddPost,
   EditPost,
+  AutherizedUser,
 };
