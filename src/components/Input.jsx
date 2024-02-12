@@ -11,7 +11,7 @@ const Input = (
     <div className="w-full mt-2 relative">
       {label && <label className="text-teal-800  font-semibold">{label}</label>}
       <input
-        type={passwordVisible ? "text" : "password"}
+        type={passwordVisible ? "text" : type}
         className={`outline-none border  rounded border-gray-500 w-full bg-transparent  p-1 ${className}`}
         placeholder={placeholder}
         {...props}
