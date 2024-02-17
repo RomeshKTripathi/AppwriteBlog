@@ -41,7 +41,7 @@ const Post = () => {
         }
         {article.content && parse(article.content)}
       </div>
-      <PostButtons article />
+      <PostButtons article={article} />
       <CommentSystem postId={postId} userData />
     </div>
   );
