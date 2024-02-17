@@ -1,9 +1,11 @@
 import React from "react";
 import service from "../appwrite/AppwriteService";
 import { useNavigate } from "react-router-dom";
+import { alternative } from "../assets";
 
 const PostCard = ({ article }) => {
   const navigate = useNavigate();
+  console.log(article.featuredimage);
   return (
     <div
       onClick={() => {
@@ -13,7 +15,11 @@ const PostCard = ({ article }) => {
     >
       <img
         className="w-full rounded-md"
-        src={service.getFilePreview(article.featuredimage)}
+        src={
+          article.featuredimage
+            ? service.getFilePreview(article.featuredimage)
+            : alternative
+        }
         alt=""
       />
       <p className="font-semibold mt-2 truncate">{article.title}</p>
