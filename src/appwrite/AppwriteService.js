@@ -115,6 +115,36 @@ export class Service {
   getFilePreview(fileId) {
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
   }
+
+  async createComment({ postId, username, comment }) {
+    try {
+      return await this.databases.createDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCommentCollectionId,
+        ID.unique(),
+        {
+          postid: postId,
+          username,
+          comment,
+        }
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getComments(queries = []) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteCommentCollectionId,
+        [...queries]
+      );
+    } catch (error) {
+      console.log("Appwrite Service :: getComments :: error", error);
+      return false;
+    }
+  }
 }
 
 const service = new Service();

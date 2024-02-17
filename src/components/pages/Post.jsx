@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../appwrite/AppwriteService";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Loading from "../Loading";
+import CommentSystem from "../CommentSystem";
 
 const Post = () => {
   const { postId } = useParams();
@@ -24,6 +25,7 @@ const Post = () => {
         navigate("/");
       });
   }, [userData]);
+
   return loader ? (
     <Loading />
   ) : (
@@ -60,6 +62,7 @@ const Post = () => {
           </button>
         </div>
       )}
+      <CommentSystem postId={postId} userData />
     </div>
   );
 };

@@ -6,5 +6,18 @@ import RTE from "./RTE";
 import PostForm from "./PostForm";
 import Loading from "./Loading";
 import PostCard from "./PostCard";
+import Comment from "./Comment";
+import CommentSystem from "./CommentSystem";
 
-export { Header, Logo, Input, Card, RTE, PostForm, Loading, PostCard };
+export {
+  Header,
+  Logo,
+  Input,
+  Card,
+  RTE,
+  PostForm,
+  Loading,
+  PostCard,
+  Comment,
+  CommentSystem,
+};
