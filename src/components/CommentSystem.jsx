@@ -11,6 +11,7 @@ const CommentSystem = ({ postId }) => {
   const commentBoxRef = useRef();
 
   const userData = useSelector((state) => state.user.userData);
+
   let commentErrorTimeoutRef;
 
   const handleComment = async (e) => {
@@ -46,7 +47,7 @@ const CommentSystem = ({ postId }) => {
       .catch((error) => {
         console.log(error.message);
       });
-  }, [handleComment]);
+  }, [handleComment, userData]);
 
   return (
     <form
