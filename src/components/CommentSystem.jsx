@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const CommentSystem = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentError, setCommentError] = useState("");
-
+  const [newComment, setNewComment] = useState(0);
   const commentBoxRef = useRef();
 
   const userData = useSelector((state) => state.user.userData);
@@ -31,6 +31,7 @@ const CommentSystem = ({ postId }) => {
       .createComment({ postId, username, comment })
       .then(() => {
         commentBoxRef.current.value = "";
+        setNewComment((count) => count + 1);
       })
       .catch((error) => {
         commentBoxRef.current.value = comment;
@@ -39,6 +40,7 @@ const CommentSystem = ({ postId }) => {
   };
 
   useEffect(() => {
+    console.log(`Rendering : ${Date.now()}`);
     service
       .getComments([Query.equal("postid", parseInt(postId))])
       .then((res) => {
@@ -47,7 +49,7 @@ const CommentSystem = ({ postId }) => {
       .catch((error) => {
         console.log(error.message);
       });
-  }, [handleComment, userData]);
+  }, [newComment]);
 
   return (
     <form
