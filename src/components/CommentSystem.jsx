@@ -49,7 +49,7 @@ const CommentSystem = ({ postId }) => {
       .catch((error) => {
         console.log(error.message);
       });
-  }, [newComment]);
+  }, [newComment, userData]);
 
   return (
     <form

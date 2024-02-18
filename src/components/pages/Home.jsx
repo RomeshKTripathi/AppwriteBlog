@@ -7,9 +7,9 @@ const Home = () => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     service.getPosts([]).then((response) => {
-      setArticles(response.documents);
+      setArticles(response.documents.reverse());
     });
-  }, []);
+  }, [articles.length]);
   return (
     <div className="w-full  p-12 max-sm:p-4 flex flex-wrap justify-evenly">
       <article className="w-7/12 max-lg:w-full px-8 max-sm:p-2 rounded-tl-md h-fit">
