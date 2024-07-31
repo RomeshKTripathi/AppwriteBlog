@@ -123,7 +123,7 @@ export class Service {
         conf.appwriteCommentCollectionId,
         ID.unique(),
         {
-          postid: postId,
+          postid: Number(postId),
           username,
           comment,
         }

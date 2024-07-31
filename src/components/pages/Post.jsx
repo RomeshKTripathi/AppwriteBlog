@@ -20,6 +20,7 @@ const Post = () => {
       .then((response) => setArticle(response))
       .finally(() => {
         setLoader(false);
+        console.log(typeof postId);
       })
       .catch((error) => {
         console.log(error);
