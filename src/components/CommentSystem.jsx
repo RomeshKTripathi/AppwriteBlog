@@ -26,9 +26,8 @@ const CommentSystem = ({ postId }) => {
       }, 1500);
       return;
     }
-    const username = userData.name;
     await service
-      .createComment({ postId, username, comment })
+      .createComment({ postId, username: userData.name, comment })
       .then(() => {
         commentBoxRef.current.value = "";
         setNewComment((count) => count + 1);
