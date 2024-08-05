@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { SearchIcon } from "../assets/Icons";
 import TagSuggestion from "../components/utility/TagSuggestion";
 import { useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import TagSearchResult from "../components/utility/TagSearchResult";
 
 function Tags() {
   const { tag } = useParams();
+  const ref = useRef(); // to clear focus after submitting tag
 
   const [showTags, setShowTags] = useState(!tag);
   const [searchedTag, setSearchedTag] = useState(tag ?? "");
@@ -25,6 +26,8 @@ function Tags() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
+          ref.current.blur();
+
           if (!searchedTag) return;
           setShowTags(false);
         }}
@@ -34,6 +37,7 @@ function Tags() {
           onFocus={() => {
             setShowTags(true);
           }}
+          ref={ref}
           onInput={handleInput}
           value={searchedTag}
           className="h-full w-full outline-none bg-transparent placeholder:text-neutral-500 pl-10 text-lg"

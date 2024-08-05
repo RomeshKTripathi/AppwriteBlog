@@ -12,9 +12,7 @@ function Input({
   return (
     <div
       className={`w-full bg-neutral-200 rounded-md p-3 flex *:self-center mb-2 ${
-        error
-          ? "outline outline-1 outline-red-600 bg-red-50 *:placeholder:text-red-500/50"
-          : ""
+        error ? "outline outline-1 outline-red-600 bg-transparent" : ""
       }`}
     >
       {Icon && <Icon style={error ? "text-red-600" : "text-neutral-600"} />}

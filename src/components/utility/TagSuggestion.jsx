@@ -107,9 +107,9 @@ function TagSuggestion({ setSearchedTag, searchedTag, handleTagClick }) {
     return null;
   return (
     <div className="flex w-10/12 mx-auto my-10 gap-4 flex-wrap justify-center">
-      {suggestedTags.slice(0, 17).map((tag) => (
+      {suggestedTags.slice(0, 17).map((tag, index) => (
         <span
-          key={tag}
+          key={index}
           onClick={(event) => {
             handleTagClick(tag);
           }}
