@@ -14,16 +14,11 @@ class Authentication {
 
     async register({ email, password, name }) {
         try {
-            const session = await this.account.create(
-                ID.unique(),
-                email,
-                password,
-                name
-            );
-            console.log(session);
+            await this.account.create(ID.unique(), email, password, name);
             return this.login({ email, password });
         } catch (error) {
             console.log("Authentication :: Register :", error.message);
+            throw error.message;
         }
     }
 
@@ -36,6 +31,7 @@ class Authentication {
             return session;
         } catch (error) {
             console.log("Authentication :: Login :", error.message);
+            throw error.message;
         }
     }
 
