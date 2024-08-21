@@ -6,6 +6,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home, About, Login, Tags, Signin } from "./routes/index.js";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+import {
+    Admin,
+    Dashboard,
+    AddNewPost,
+    AllPosts,
+    Resources,
+    Settings,
+    AdminProfile,
+    Support,
+} from "./routes/Admin/AdminExports.js";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -35,6 +46,40 @@ const router = createBrowserRouter([
             {
                 path: "/signin",
                 element: <Signin />,
+            },
+        ],
+    },
+    {
+        path: "/admin",
+        element: <Admin />,
+        children: [
+            {
+                path: "/admin",
+                element: <Dashboard />,
+            },
+            {
+                path: "/admin/profile",
+                element: <AdminProfile />,
+            },
+            {
+                path: "/admin/add-new-post",
+                element: <AddNewPost />,
+            },
+            {
+                path: "/admin/all-posts",
+                element: <AllPosts />,
+            },
+            {
+                path: "/admin/resources",
+                element: <Resources />,
+            },
+            {
+                path: "/admin/settings",
+                element: <Settings />,
+            },
+            {
+                path: "/admin/support",
+                element: <Support />,
             },
         ],
     },

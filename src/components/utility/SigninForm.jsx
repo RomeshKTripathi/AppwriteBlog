@@ -1,54 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { LockIcon, UserIcon, MailIcon, CrossIcon } from "../../assets/Icons";
+import { LockIcon, UserIcon, MailIcon } from "../../assets/Icons";
 import Button from "../utility/Button";
 import Input from "./Input";
-import { authentication as auth } from "../../appwrite/Authentication";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { storeLogin } from "../../store/userSlice";
+import { useSignin } from "../../hooks/useSignin";
+import useToast from "../../hooks/useToast";
 
 function SigninForm() {
-    // Hooks
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const errorRef = useRef();
+    const { signingIn, signin, signinError } = useSignin();
+    const { toastList, createToast } = useToast();
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm();
-
-    // Handlers
-    const onSubmit = (data) => {
-        const dataObj = {
-            name: data.firstname + " " + data.lastname,
-            email: data.email,
-            password: data.password,
-        };
-        auth.register(dataObj)
-            .then((result) => {
-                console.log(result);
-                dispatch(storeLogin(result));
-                navigate("/");
-            })
-            .catch((err) => {
-                setError(err);
-                errorRef.current = setTimeout(() => {
-                    setError("");
-                }, 5000);
-            });
-    };
-
-    // JSX
+    useEffect(() => {
+        if (signinError) createToast(signinError, "error", 5000);
+    }, [signinError]);
     return (
         <>
-            <form
-                className=" relative my-2 p-4"
-                onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className=" relative p-4" onSubmit={handleSubmit(signin)}>
                 <Input
                     {...{
                         Icon: UserIcon,
@@ -108,11 +79,15 @@ function SigninForm() {
                     </label>
                 </div>
                 <Button
+                    loading={signingIn}
                     text="Register"
                     type={"submit"}
                     style={"rounded-md text-center my-2 py-2 text-xl"}
                 />
             </form>
+            <div className="absolute top-14 max-w-96 left-5 z-[999]">
+                {toastList.map((item, index) => item)}
+            </div>
         </>
     );
 }

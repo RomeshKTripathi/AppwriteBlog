@@ -4,7 +4,7 @@ import SigninForm from "../components/utility/SigninForm";
 
 function Signin() {
     return (
-        <div className="w-full my-40 flex justify-center">
+        <div className="w-full flex justify-center">
             <div className="w-80 ">
                 <span className="font-semibold text-4xl text-center block my-2">
                     Welcome!

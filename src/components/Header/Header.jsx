@@ -24,7 +24,7 @@ function Header() {
     return (
         <div className="w-full py-4 flex justify-between z-50 bg-white *:self-center mb-5 sticky top-0">
             <NavLink to="/">
-                <Logo />
+                <Logo style={"text-3xl"} />
             </NavLink>
             <div className="flex mr-auto ml-10 gap-4 font-semibold text-lg">
                 {links.map((linkObject) => (

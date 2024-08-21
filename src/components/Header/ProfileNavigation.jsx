@@ -1,38 +1,33 @@
 import React from "react";
-import { storeLogout } from "../../store/userSlice";
-import { useDispatch } from "react-redux";
-import { authentication as auth } from "../../appwrite/Authentication";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import useLogout from "../../hooks/useLogout";
 
 const profileNavLinks = [
     {
+        id: 1,
         text: "Dashboard",
-        path: "/Dashboard",
+        path: "../admin",
     },
     {
+        id: 2,
         text: "Write a post",
         path: "",
     },
     {
+        id: 3,
         text: "Settings",
         path: "",
     },
     {
+        id: 4,
         text: "help",
         path: "",
     },
 ];
 function ProfileNavigation({ onMouseLeave }) {
-    const dispatch = useDispatch();
-
-    const handleSignout = () => {
-        try {
-            auth.logout().then(() => {
-                dispatch(storeLogout());
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const userData = useSelector((state) => state.user.userData);
+    const { loggingOut, logout } = useLogout();
 
     return (
         <div
@@ -40,29 +35,32 @@ function ProfileNavigation({ onMouseLeave }) {
             className="absolute bg-white rounded-md w-44 top-16 shadow-sm right-0 border "
         >
             <div className="py-2 px-4 border-b *:block">
-                <span className="font-bold cursor-pointer">Arthur Black</span>
-                <span className="truncate cursor-pointer text-neutral-500">
-                    @arthurblack
+                <span className="font-bold cursor-pointer">
+                    {userData.name}
+                </span>
+                <span className="truncate cursor-pointer text-neutral-500 text-sm">
+                    {userData.email}
                 </span>
             </div>
             <div className="py-2 px-4">
                 {profileNavLinks.map((item) => (
-                    <div
-                        className="hover:font-semibold cursor-pointer"
-                        key={item.text}
-                    >
-                        {item.text}
-                    </div>
+                    <Link key={item.id} to={item.path}>
+                        <div className="hover:font-semibold cursor-pointer">
+                            {item.text}
+                        </div>
+                    </Link>
                 ))}
                 <div
                     className="hover:font-semibold cursor-pointer "
-                    onClick={handleSignout}
+                    onClick={logout}
                 >
-                    Signout
+                    <span className={`${loggingOut ? "ml-4 loader" : ""}`}>
+                        {loggingOut ? "" : "Logout"}
+                    </span>
                 </div>
             </div>
         </div>
     );
 }
 
-export default ProfileNavigation;
+export default React.memo(ProfileNavigation);

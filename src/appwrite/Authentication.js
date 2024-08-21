@@ -1,13 +1,14 @@
 import { Account, Client, ID } from "appwrite";
 import { config } from "../../config.js";
+import { current } from "@reduxjs/toolkit";
 class Authentication {
     client;
     account;
 
     constructor() {
         this.client = new Client()
-            .setEndpoint(config.endpoint) // Your API Endpoint
-            .setProject(config.projectId); // Your project ID
+            .setEndpoint(config.appwriteEndpoint) // Your API Endpoint
+            .setProject(config.appwriteProjectId); // Your project ID
 
         this.account = new Account(this.client);
     }
@@ -24,11 +25,8 @@ class Authentication {
 
     async login({ email, password }) {
         try {
-            const session = await this.account.createEmailPasswordSession(
-                email,
-                password
-            );
-            return session;
+            await this.account.createEmailPasswordSession(email, password);
+            return this.currentUser();
         } catch (error) {
             console.log("Authentication :: Login :", error.message);
             throw error.message;
