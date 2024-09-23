@@ -11,7 +11,12 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { handleSubmit, register } = useForm();
+    const { handleSubmit, register } = useForm({
+        defaultValues: {
+            email: "admin@xyz.com",
+            password: "00000000",
+        },
+    });
 
     const userLogin = async (formData) => {
         setError("");
@@ -44,7 +49,6 @@ const Login = () => {
                     label="Email"
                     className={"text-teal-500-500"}
                     autoComplete="off"
-                    value="admin@xyz.com"
                     {...register("email", {
                         required: true,
                     })}
@@ -56,7 +60,6 @@ const Login = () => {
                     label="Password"
                     className={"text-teal-500-500"}
                     autoComplete="off"
-                    value="00000000"
                     {...register("password", {
                         required: true,
                     })}
