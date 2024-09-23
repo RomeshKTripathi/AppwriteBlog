@@ -11,6 +11,7 @@ const MyPosts = () => {
   useEffect(() => {
     service.getPosts([Query.equal("userid", userData.$id)]).then((response) => {
       setArticles(response.documents);
+      console.log("Articles loaded");
       setLoader(false);
     });
   }, []);
